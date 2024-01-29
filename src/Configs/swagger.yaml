@@ -1,0 +1,51 @@
+openapi: 3.0.0
+components:
+  securitySchemes:
+    jwtAuthToken:
+      type: apiKey
+      in: cookie
+      name: auth_token
+      description: Use JWT token in a cookie for authentication
+    jwtLoginToken:
+      type: apiKey
+      in: cookie
+      name: login_token
+      description: Use JWT login token in a cookie for authentication
+info:
+  title: Car Site Auth API
+  version: 1.0.0
+  description: API for Logging onto Car Site Api
+servers:
+  - url: http://localhost:8001
+    description: Development server
+paths:
+  "/api/auth/login":
+    post:
+      summary: Login
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Loginsuccessfully
+  "/api/auth/logout":
+    get:
+      summary: Logout
+      security:
+        - jwtAuthToken: []
+        - jwtLoginToken: []  
+      tags:
+        - Auth
+      responses:
+        "200":
+          description: Logout successfully
