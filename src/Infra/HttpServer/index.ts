@@ -57,6 +57,7 @@ class HttpServer {
       origin: CAR_SITE_FRONTEND_URL,
       credentials: true,
     }));
+    this.app.set('trust proxy', 1)
     this.app.use(morgan("dev"));
   }
 
