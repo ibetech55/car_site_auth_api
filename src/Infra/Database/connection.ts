@@ -16,6 +16,6 @@ const AppDataSource = new DataSource({
   synchronize: false,
   logging: false,
   entities: [AuthUsers, Auth],
-  migrations: process.env.NODE_ENV === 'production' ? ['./src/Migrations/*.{ts,js}'] : ['./src/Migrations/*.{ts,js}'],
+  migrations: ['./Migrations/*.{ts,js}'],
 });
 export { AppDataSource };
