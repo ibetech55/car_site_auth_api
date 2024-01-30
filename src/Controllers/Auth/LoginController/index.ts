@@ -16,13 +16,18 @@ class LoginController {
       secure: true,
       sameSite: "none",
       maxAge: 1000 * 60 * 60 * 1,
+      domain: "car-site-frontend.onrender.com",
+      path: "/",
     });
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
       secure: true,
       sameSite: "none",
       maxAge: 1000 * 60 * 60 * 1,
+      domain: "car-site-frontend.onrender.com",
+      path: "/",
     });
+
 
     return response.status(200).json(data);
   }
