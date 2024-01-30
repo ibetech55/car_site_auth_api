@@ -28,6 +28,7 @@ class LoginController {
       path: "/",
     });
 
+    console.log('Cookie set:', data.login_token);
 
     return response.status(200).json(data);
   }
