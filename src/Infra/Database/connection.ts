@@ -16,5 +16,5 @@ const AppDataSource = new DataSource({
   synchronize: false,
   logging: false,
   entities: [AuthUsers, Auth],
-  migrations: [`${__dirname}/**/migrations/*.{ts,js}`]});
+  migrations: [`${__dirname}/**/Migrations/*.{ts,js}`]});
 export { AppDataSource };
