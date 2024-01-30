@@ -54,7 +54,7 @@ class HttpServer {
     this.app.use(express.json());
     this.app.use(cookieParser());
     this.app.use(cors({
-      origin: [CAR_SITE_FRONTEND_URL],
+      origin: CAR_SITE_FRONTEND_URL,
       credentials: true,
     }));
     this.app.use(morgan("dev"));
