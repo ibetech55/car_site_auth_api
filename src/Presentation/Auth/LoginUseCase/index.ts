@@ -39,18 +39,16 @@ class LoginUseCase {
       throw new AppError("Incorrect email or password", 400);
     }
 
-    const [token, loginToken] = await Promise.all([
-      this._generateToken.authToken({
-        user_id: userData.user_id,
-        email: userData.email,
-        first_name: userData.first_name,
-        last_name: userData.last_name,
-        type: userData.type,
-      }),
-      this._generateToken.loginToken({
-        user_id: userData.user_id,
-      }),
-    ]);
+    const token = this._generateToken.authToken({
+      user_id: userData.user_id,
+      email: userData.email,
+      first_name: userData.first_name,
+      last_name: userData.last_name,
+      type: userData.type,
+    });
+    const loginToken = this._generateToken.loginToken({
+      user_id: userData.user_id,
+    });
 
     const tokenData = verifyToken(token, loginToken);
 

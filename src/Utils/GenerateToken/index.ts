@@ -17,7 +17,7 @@ interface ILoginTokenData {
 }
 
 class GenerateToken {
-  async authToken(userData: ITokenData): Promise<string> {
+  authToken(userData: ITokenData): string {
     const token = jwtToken.sign(userData, AUTH_TOKEN_SECRET_KEY, {
       expiresIn: AUTH_TOKEN_TIME,
     });
@@ -25,7 +25,7 @@ class GenerateToken {
     return token;
   }
 
-  async loginToken(userData: ILoginTokenData): Promise<string> {
+  loginToken(userData: ILoginTokenData): string {
     const token = jwtToken.sign(userData, AUTH_TOKEN_SECRET_KEY, {
       expiresIn: AUTH_TOKEN_TIME,
     });
