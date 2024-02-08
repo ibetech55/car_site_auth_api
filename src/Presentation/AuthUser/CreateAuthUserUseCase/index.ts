@@ -2,13 +2,14 @@ import { CreateAuthUserDbDto } from "../../../Data/AuthUser/CreateAuthUserDto";
 import { IAuthUserRepository } from "../../../Repositories/AuthUser/IAuthUserRepository";
 
 class CreateAuthUserUseCase {
-  private _userRepository: IAuthUserRepository;
-  constructor(userRepository: IAuthUserRepository) {
-    this._userRepository = userRepository;
+  private readonly _authUserRepository: IAuthUserRepository;
+
+  constructor(authUserRepository: IAuthUserRepository) {
+    this._authUserRepository = authUserRepository;
   }
 
   async execute(values: CreateAuthUserDbDto) {
-    const data = await this._userRepository.create({
+    const data = await this._authUserRepository.create({
       ...values,
       active: false,
     });

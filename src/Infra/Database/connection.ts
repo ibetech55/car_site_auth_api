@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { DataSource } from "typeorm";
 import '../../Configs/Enviroment'
 import { Auth } from "../../Entities/auth.entity";
-import { DATABASE_HOST, DATABASE_NAME, DATABASE_PASSWORD, DATABASE_PORT, DATABASE_USERNAME, PORT } from "../../Configs/Enviroment/EnvirmentVariables";
+import { DATABASE_HOST, DATABASE_NAME, DATABASE_PASSWORD, DATABASE_PORT, DATABASE_USERNAME } from "../../Configs/Enviroment/EnvirmentVariables";
 import { AuthUsers } from "../../Entities/auth.user.entity";
 
 

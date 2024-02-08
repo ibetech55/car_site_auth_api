@@ -21,7 +21,7 @@ export class AuthUserRepository implements IAuthUserRepository {
       const data = await this.repository.save(newUser);
       return data;
     } catch (error) {
-      console.log(error, 988)
+      console.log(error)
     }
 
   }

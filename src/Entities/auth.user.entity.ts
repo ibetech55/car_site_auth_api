@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { v4 as uuid } from "uuid";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
 
 @Entity("auth_users")
 class AuthUsers {
@@ -27,6 +27,9 @@ class AuthUsers {
   type: string;
 
   @Column()
+  access_code: string;
+
+  @Column()
   user_id: string;
 
   @Column()
@@ -36,7 +39,7 @@ class AuthUsers {
   created_at?: Date;
 
   @UpdateDateColumn()
-  updated_at?: Date | string;
+  updated_at?: Date;
 
   @DeleteDateColumn()
   deleted_at?: Date | string;

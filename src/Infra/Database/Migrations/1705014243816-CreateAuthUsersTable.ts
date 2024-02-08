@@ -48,6 +48,11 @@ export class CreateUserTable1705014243816 implements MigrationInterface {
             isNullable: false,
           },
           {
+            name: "access_code",
+            type: "varchar(100)",
+            isNullable: true,
+          },
+          {
             name: "password",
             type: "text",
             isNullable: false,
@@ -68,12 +73,12 @@ export class CreateUserTable1705014243816 implements MigrationInterface {
             type: "TIMESTAMPTZ",
             isNullable: true,
           },
-        ],
+        ]
       })
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("users");
+    await queryRunner.dropTable("auth_users");
   }
 }

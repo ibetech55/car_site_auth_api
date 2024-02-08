@@ -1,4 +1,4 @@
-import { UpdateAuthUserUseCase } from "../../Presentation/User/UpdateAuthUserUseCase";
+import { UpdateAuthUserUseCase } from "../../Presentation/AuthUser/UpdateAuthUserUseCase";
 import { AuthUserRepository } from "../../Repositories/AuthUser/auth.user.repository";
 
 const repository = new AuthUserRepository();

@@ -7,5 +7,6 @@ export interface CreateAuthUserDbDto {
   type: string;
   password: string;
   user_id: string;
+  access_code: string;
 }
 

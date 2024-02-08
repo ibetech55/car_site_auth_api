@@ -6,19 +6,20 @@ import swaggerUi from "swagger-ui-express";
 import path from "path";
 import YAML from "yamljs";
 import "../../Configs/Enviroment";
-import queue from "../../Queue";
+// import queue from "../../Queue";
 import { apiRoutes } from "../../Routes";
 import { AppError } from "../../ErrorHandler/AppError";
 import cookieParser from "cookie-parser";
 import { CAR_SITE_FRONTEND_URL, PORT } from "../../Configs/Enviroment/EnvirmentVariables";
 import { bots } from "../../Bots";
+import { rabbitMq } from "../../Queue";
 class HttpServer {
   app: express.Express;
   constructor() {
     this.app = express();
     this.defaultHeaders();
     this.middlewares();
-    // this.queues();
+    this.queues();
     this.jobs();
     this.routes();
     this.errorHandler();
@@ -27,8 +28,13 @@ class HttpServer {
     console.log("Connected to Http Server");
   }
 
-  queues() {
-    queue.execute();
+  async queues() {
+    try {
+      await rabbitMq.connect();
+      await rabbitMq.subscribeToQueues();
+    } catch (error) {
+      console.log("RABBIT MQ ERROR", error);
+    }
   }
 
   jobs() {
@@ -57,7 +63,6 @@ class HttpServer {
       origin: CAR_SITE_FRONTEND_URL,
       credentials: true,
     }));
-    this.app.set('trust proxy', 1)
     this.app.use(morgan("dev"));
   }
 

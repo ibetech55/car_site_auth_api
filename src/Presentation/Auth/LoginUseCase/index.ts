@@ -36,7 +36,7 @@ class LoginUseCase {
     );
 
     if (!comparePassword) {
-      throw new AppError("Invalid", 400);
+      throw new AppError("Incorrect email or password", 400);
     }
 
     const [token, loginToken] = await Promise.all([
