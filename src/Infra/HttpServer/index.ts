@@ -6,15 +6,18 @@ import swaggerUi from "swagger-ui-express";
 import path from "path";
 import YAML from "yamljs";
 import "../../Configs/Enviroment";
-// import queue from "../../Queue";
 import { apiRoutes } from "../../Routes";
 import { AppError } from "../../ErrorHandler/AppError";
 import cookieParser from "cookie-parser";
-import { CAR_SITE_FRONTEND_URL, PORT } from "../../Configs/Enviroment/EnvirmentVariables";
+import {
+  CAR_SITE_FRONTEND_URL,
+  PORT,
+} from "../../Configs/Enviroment/EnvirmentVariables";
 import { bots } from "../../Bots";
 import { rabbitMq } from "../../Queue";
 class HttpServer {
   app: express.Express;
+  private readonly corsOrgins = [CAR_SITE_FRONTEND_URL, "http://localhost:3000"];
   constructor() {
     this.app = express();
     this.defaultHeaders();
@@ -59,10 +62,12 @@ class HttpServer {
   middlewares() {
     this.app.use(express.json());
     this.app.use(cookieParser());
-    this.app.use(cors({
-      origin: CAR_SITE_FRONTEND_URL,
-      credentials: true,
-    }));
+    this.app.use(
+      cors({
+        origin: this.corsOrgins,
+        credentials: true,
+      })
+    );
     this.app.use(morgan("dev"));
   }
 
@@ -86,12 +91,24 @@ class HttpServer {
 
   defaultHeaders() {
     this.app.use((req, res, next) => {
-      res.setHeader('Access-Control-Allow-Credentials', 'true');
-      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      const origin = this.corsOrgins.includes(
+        req.header("origin")
+      )
+        ? req.headers.origin
+        : null;
 
-      res.setHeader('Access-Control-Allow-Origin', CAR_SITE_FRONTEND_URL);
-      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
-      // res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+      res.setHeader("Access-Control-Allow-Credentials", "true");
+      res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Content-Type, Authorization"
+      );
+
+      res.setHeader("Access-Control-Allow-Origin", origin);
+      res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, PATCH"
+      );
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
       next();
     });
   }
