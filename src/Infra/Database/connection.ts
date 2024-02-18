@@ -1,10 +1,15 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import '../../Configs/Enviroment'
+import "../../Configs/Enviroment";
 import { Auth } from "../../Entities/auth.entity";
-import { DATABASE_HOST, DATABASE_NAME, DATABASE_PASSWORD, DATABASE_PORT, DATABASE_USERNAME } from "../../Configs/Enviroment/EnvirmentVariables";
+import {
+  DATABASE_HOST,
+  DATABASE_NAME,
+  DATABASE_PASSWORD,
+  DATABASE_PORT,
+  DATABASE_USERNAME,
+} from "../../Configs/Enviroment/EnvirmentVariables";
 import { AuthUsers } from "../../Entities/auth.user.entity";
-
 
 const AppDataSource = new DataSource({
   type: "postgres",
@@ -16,5 +21,9 @@ const AppDataSource = new DataSource({
   synchronize: false,
   logging: false,
   entities: [AuthUsers, Auth],
-  migrations: [`${__dirname}/**/Migrations/*.{ts,js}`]});
+  migrations: [`${__dirname}/**/Migrations/*.{ts,js}`],
+  ssl:{
+    rejectUnauthorized: false
+  }
+});
 export { AppDataSource };
