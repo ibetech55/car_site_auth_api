@@ -15,21 +15,21 @@ class LoginController {
     const data = await this._loginUseCase.execute(request.body);
     response.cookie("auth_token", data.auth_token, {
       httpOnly: true,
-      secure: true,
+      secure: false,
       sameSite: "none",
       maxAge: - 1,
       domain: COOKIE_DOMAIN,
       path: '/',
-      expires: new Date('2030-12-31T23:59:59Z')
+      expires: new Date(Date.now() + 900000)
     });
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
-      secure: true,
+      secure: false,
       sameSite: "none",
       maxAge: - 1,
       domain: COOKIE_DOMAIN,
       path: '/',
-      expires: new Date('2030-12-31T23:59:59Z')
+      expires: new Date(Date.now() + 900000)
     });
 
     return response.status(200).json(data);
