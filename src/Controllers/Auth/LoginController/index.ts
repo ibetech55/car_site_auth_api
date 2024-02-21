@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import { LoginUseCase } from "../../../Presentation/Auth/LoginUseCase";
-import { CAR_SITE_FRONTEND_URL, COOKIE_DOMAIN } from "../../../Configs/Enviroment/EnvirmentVariables";
+import {
+  CAR_SITE_FRONTEND_URL,
+  COOKIE_DOMAIN,
+} from "../../../Configs/Enviroment/EnvirmentVariables";
 
 class LoginController {
   private readonly _loginUseCase: LoginUseCase;
@@ -16,18 +19,17 @@ class LoginController {
       secure: true,
       sameSite: "none",
       maxAge: 1000 * 60 * 60 * 60 * 7,
-      expires: new Date(Date.now() + 900000)
-      
+      expires: new Date(Date.now() + 900000),
+      path: "/",
     });
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
       secure: true,
       sameSite: "none",
       maxAge: 1000 * 60 * 60 * 60 * 7,
-      expires: new Date(Date.now() + 900000)
+      expires: new Date(Date.now() + 900000),
+      path: "/",
     });
-
-
 
     return response.status(200).json(data);
   }
