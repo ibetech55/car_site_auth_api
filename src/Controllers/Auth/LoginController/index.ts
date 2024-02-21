@@ -17,7 +17,6 @@ class LoginController {
       sameSite: "strict",
       maxAge: - 1,
       domain: COOKIE_DOMAIN,
-      path: '/',
       expires: new Date(Date.now() + 900000)
       
     });
@@ -27,7 +26,6 @@ class LoginController {
       sameSite: "strict",
       maxAge: - 1,
       domain: COOKIE_DOMAIN,
-      path: '/',
       expires: new Date(Date.now() + 900000)
     });
 
