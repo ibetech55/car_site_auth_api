@@ -17,7 +17,7 @@ class LoginController {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      maxAge: 1000 * 60 * 60 * 1,
+      maxAge: - 1,
       domain: COOKIE_DOMAIN,
       path: '/'
     });
@@ -25,7 +25,7 @@ class LoginController {
       httpOnly: false,
       secure: true,
       sameSite: "none",
-      maxAge: 1000 * 60 * 60 * 1,
+      maxAge: - 1,
       domain: COOKIE_DOMAIN,
       path: '/'
     });
