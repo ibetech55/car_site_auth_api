@@ -18,7 +18,6 @@ class LoginController {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      maxAge: 1000 * 60 * 60 * 60 * 7,
       expires: new Date(Date.now() + 900000),
       path: "/",
     });
@@ -26,7 +25,6 @@ class LoginController {
       httpOnly: false,
       secure: true,
       sameSite: "none",
-      maxAge: 1000 * 60 * 60 * 60 * 7,
       expires: new Date(Date.now() + 900000),
       path: "/",
     });
