@@ -32,8 +32,10 @@ class LoginController {
     // });
     // response.setHeader('Set-Cookie', `login_token=${data.login_token}; HttpOnly`);
 
-    response.setHeader('Set-Cookie', `auth_token=${data.auth_token}; HttpOnly; Domain=${COOKIE_DOMAIN}; Secure=false; SameSite=None; Path=/`);
-    response.setHeader('Set-Cookie', `login_token=${data.login_token}; Domain=${COOKIE_DOMAIN}; Secure=false; SameSite=None; Path=/`);
+    response.setHeader('Set-Cookie', [
+      `auth_token=${data.auth_token}; HttpOnly; Domain=${COOKIE_DOMAIN}; Secure=false; SameSite=None; Path=/`,
+      `login_token=${data.login_token}; Domain=${COOKIE_DOMAIN}; Secure=false; SameSite=None; Path=/`
+    ]);
 
     return response.status(200).json(data);
   }
