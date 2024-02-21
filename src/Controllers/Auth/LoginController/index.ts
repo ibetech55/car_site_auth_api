@@ -14,18 +14,16 @@ class LoginController {
     response.cookie("auth_token", data.auth_token, {
       httpOnly: true,
       secure: true,
-      sameSite: "strict",
-      maxAge: - 1,
-      domain: COOKIE_DOMAIN,
+      sameSite: "none",
+      maxAge: 1000 * 60 * 60 * 60 * 7,
       expires: new Date(Date.now() + 900000)
       
     });
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
       secure: true,
-      sameSite: "strict",
-      maxAge: - 1,
-      domain: COOKIE_DOMAIN,
+      sameSite: "none",
+      maxAge: 1000 * 60 * 60 * 60 * 7,
       expires: new Date(Date.now() + 900000)
     });
 
