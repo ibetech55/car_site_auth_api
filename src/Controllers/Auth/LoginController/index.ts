@@ -14,7 +14,7 @@ class LoginController {
     response.cookie("auth_token", data.auth_token, {
       httpOnly: true,
       secure: true,
-      sameSite: "none",
+      sameSite: "strict",
       maxAge: - 1,
       domain: COOKIE_DOMAIN,
       path: '/',
@@ -24,7 +24,7 @@ class LoginController {
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
       secure: true,
-      sameSite: "none",
+      sameSite: "strict",
       maxAge: - 1,
       domain: COOKIE_DOMAIN,
       path: '/',
