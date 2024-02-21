@@ -17,7 +17,10 @@ import { bots } from "../../Bots";
 import { rabbitMq } from "../../Queue";
 class HttpServer {
   app: express.Express;
-  private readonly corsOrgins = [CAR_SITE_FRONTEND_URL, "http://localhost:3000"];
+  private readonly corsOrgins = [
+    CAR_SITE_FRONTEND_URL,
+    "http://localhost:3000",
+  ];
   constructor() {
     this.app = express();
     this.defaultHeaders();
@@ -91,9 +94,7 @@ class HttpServer {
 
   defaultHeaders() {
     this.app.use((req, res, next) => {
-      const origin = this.corsOrgins.includes(
-        req.header("origin")
-      )
+      const origin = this.corsOrgins.includes(req.header("origin"))
         ? req.headers.origin
         : null;
 
@@ -108,7 +109,7 @@ class HttpServer {
         "Access-Control-Allow-Methods",
         "GET, POST, PUT, DELETE, PATCH"
       );
-      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+      res.setHeader("Access-Control-Allow-Headers", "Content-Type");
       next();
     });
   }
