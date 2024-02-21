@@ -7,24 +7,27 @@ class LoginController {
 
   constructor(loginUseCase: LoginUseCase) {
     this._loginUseCase = loginUseCase;
+    console.log(COOKIE_DOMAIN, 999)
+
   }
 
   async handle(request: Request, response: Response) {
     const data = await this._loginUseCase.execute(request.body);
-    console.log(COOKIE_DOMAIN)
     response.cookie("auth_token", data.auth_token, {
       httpOnly: true,
       secure: true,
       sameSite: "none",
       maxAge: 1000 * 60 * 60 * 1,
-      domain: COOKIE_DOMAIN
+      domain: COOKIE_DOMAIN,
+      path: '/'
     });
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
       secure: true,
       sameSite: "none",
       maxAge: 1000 * 60 * 60 * 1,
-      domain: COOKIE_DOMAIN
+      domain: COOKIE_DOMAIN,
+      path: '/'
     });
 
     return response.status(200).json(data);
