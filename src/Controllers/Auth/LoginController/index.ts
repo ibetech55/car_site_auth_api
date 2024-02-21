@@ -19,7 +19,8 @@ class LoginController {
       sameSite: "none",
       maxAge: - 1,
       domain: COOKIE_DOMAIN,
-      path: '/'
+      path: '/',
+      expires: new Date('2030-12-31T23:59:59Z')
     });
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
@@ -27,7 +28,8 @@ class LoginController {
       sameSite: "none",
       maxAge: - 1,
       domain: COOKIE_DOMAIN,
-      path: '/'
+      path: '/',
+      expires: new Date('2030-12-31T23:59:59Z')
     });
 
     return response.status(200).json(data);
