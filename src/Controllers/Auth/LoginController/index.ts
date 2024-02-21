@@ -13,7 +13,7 @@ class LoginController {
     const data = await this._loginUseCase.execute(request.body);
     response.cookie("auth_token", data.auth_token, {
       httpOnly: true,
-      secure: false,
+      secure: true,
       sameSite: "none",
       maxAge: - 1,
       domain: COOKIE_DOMAIN,
@@ -23,7 +23,7 @@ class LoginController {
     });
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
-      secure: false,
+      secure: true,
       sameSite: "none",
       maxAge: - 1,
       domain: COOKIE_DOMAIN,
