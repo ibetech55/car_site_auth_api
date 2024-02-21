@@ -21,13 +21,13 @@ class LoginController {
       expires: new Date(Date.now() + 900000),
       path: "/",
     });
-    response.cookie("login_token", data.login_token, {
-      httpOnly: false,
-      secure: true,
-      sameSite: "none",
-      expires: new Date(Date.now() + 900000),
-      path: "/",
-    });
+    // response.cookie("login_token", data.login_token, {
+    //   httpOnly: false,
+    //   secure: true,
+    //   sameSite: "none",
+    //   expires: new Date(Date.now() + 900000),
+    //   path: "/",
+    // });
 
     return response.status(200).json(data);
   }
