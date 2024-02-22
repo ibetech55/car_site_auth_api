@@ -14,24 +14,25 @@ class LoginController {
 
   async handle(request: Request, response: Response) {
     const data = await this._loginUseCase.execute(request.body);
+     const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 7);
+    const expires = expirationDate.toUTCString();
+
     response.cookie("auth_token", data.auth_token, {
       httpOnly: true,
       secure: true,
-      expires: new Date(Date.now() + 900000),
+      expires: expirationDate,
       sameSite:'none',
       path: "/",
     });
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
       secure: true,
-      expires: new Date(Date.now() + 900000),
+      expires: expirationDate,
       sameSite:'none',
       path: "/",
     });
-    // const expirationDate = new Date();
-    // expirationDate.setDate(expirationDate.getDate() + 7);
-    // const expires = expirationDate.toUTCString();
-
+   
     // // response.set('Set-Cookie', `auth_token=${data.auth_token}; HttpOnly`)
     // // response.set('Set-Cookie', `auth_token=${data.auth_token}; HttpOnly; Expires=${expires}; Max-Age=604800`);
 
