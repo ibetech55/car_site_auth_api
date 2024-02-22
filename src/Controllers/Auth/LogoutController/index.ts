@@ -29,7 +29,7 @@ class LogoutController {
     });
 
 
-    return response.clearCookie('auth_token').clearCookie('login_token').status(200).json(true);
+    return response.status(200).json(true);
   }
 }
 
