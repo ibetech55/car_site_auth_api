@@ -22,22 +22,19 @@ class LoginController {
       httpOnly: true,
       secure: true,
       expires: expirationDate,
-      sameSite:'none',
+      sameSite:'strict',
       path: "/",
-      domain: 'ibetech.shop'
+      domain: 'api.ibetech.shop'
     });
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
       secure: true,
       expires: expirationDate,
-      sameSite:'none',
+      sameSite:'strict',
       path: "/",
-      domain: 'ibetech.shop'
+      domain: 'api.ibetech.shop'
     });
    
-    // // response.set('Set-Cookie', `auth_token=${data.auth_token}; HttpOnly`)
-    // // response.set('Set-Cookie', `auth_token=${data.auth_token}; HttpOnly; Expires=${expires}; Max-Age=604800`);
-
     return response.status(200).json(data);
   }
 }
