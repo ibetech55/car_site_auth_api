@@ -18,12 +18,14 @@ class LoginController {
       httpOnly: true,
       secure: true,
       expires: new Date(Date.now() + 900000),
+      sameSite:'strict',
       path: "/",
     });
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
       secure: true,
       expires: new Date(Date.now() + 900000),
+      sameSite:'strict',
       path: "/",
     });
     // const expirationDate = new Date();
