@@ -24,7 +24,7 @@ class LoginController {
       expires: expirationDate,
       sameSite:'none',
       path: "/",
-      domain: 'ibetwech.shop'
+      domain: 'ibetech.shop'
     });
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
@@ -32,7 +32,7 @@ class LoginController {
       expires: expirationDate,
       sameSite:'none',
       path: "/",
-      domain: 'ibetwech.shop'
+      domain: 'ibetech.shop'
     });
    
     // // response.set('Set-Cookie', `auth_token=${data.auth_token}; HttpOnly`)
