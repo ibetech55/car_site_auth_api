@@ -17,17 +17,21 @@ class LoginController {
     response.cookie("auth_token", data.auth_token, {
       httpOnly: true,
       secure: true,
-      sameSite: "none",
       expires: new Date(Date.now() + 900000),
       path: "/",
     });
-    // response.cookie("login_token", data.login_token, {
-    //   httpOnly: false,
-    //   secure: true,
-    //   sameSite: "none",
-    //   expires: new Date(Date.now() + 900000),
-    //   path: "/",
-    // });
+    response.cookie("login_token", data.login_token, {
+      httpOnly: false,
+      secure: true,
+      expires: new Date(Date.now() + 900000),
+      path: "/",
+    });
+    // const expirationDate = new Date();
+    // expirationDate.setDate(expirationDate.getDate() + 7);
+    // const expires = expirationDate.toUTCString();
+
+    // // response.set('Set-Cookie', `auth_token=${data.auth_token}; HttpOnly`)
+    // // response.set('Set-Cookie', `auth_token=${data.auth_token}; HttpOnly; Expires=${expires}; Max-Age=604800`);
 
     return response.status(200).json(data);
   }
