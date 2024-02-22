@@ -22,14 +22,14 @@ class LoginController {
       httpOnly: true,
       secure: true,
       expires: expirationDate,
-      sameSite:'none',
+      sameSite:'lax',
       path: "/",
     });
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
       secure: true,
       expires: expirationDate,
-      sameSite:'none',
+      sameSite:'lax',
       path: "/",
     });
    
