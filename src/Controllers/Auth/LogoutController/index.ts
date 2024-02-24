@@ -26,7 +26,7 @@ class LogoutController {
       expires: new Date(0),
       sameSite:'strict',
       path: "/",
-      domain: AUTH_API_DOMAIN
+      domain: "ibetech.shop"
     });
 
 

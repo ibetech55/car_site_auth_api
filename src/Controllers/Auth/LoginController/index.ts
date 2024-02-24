@@ -23,7 +23,7 @@ class LoginController {
       expires: expirationDate,
       sameSite: "strict",
       path: "/",
-      domain: AUTH_API_DOMAIN,
+      domain: 'ibetech.shop',
     });
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
