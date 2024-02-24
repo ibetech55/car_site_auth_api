@@ -31,7 +31,7 @@ class LoginController {
       expires: expirationDate,
       sameSite: "strict",
       path: "/",
-      domain: AUTH_API_DOMAIN,
+      domain: 'ibetech.shop',
     });
 
     return response.status(200).json(data);
