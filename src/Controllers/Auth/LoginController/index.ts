@@ -19,7 +19,7 @@ class LoginController {
 
     response.cookie("auth_token", data.auth_token, {
       httpOnly: true,
-      secure: NODE_ENV === 'production',
+      secure: NODE_ENV === 'production' ? true : false,
       expires: expirationDate,
       sameSite: "strict",
       path: "/",
@@ -27,7 +27,7 @@ class LoginController {
     });
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
-      secure: NODE_ENV === 'production',
+      secure: NODE_ENV === 'production' ? true : false,
       expires: expirationDate,
       sameSite: "strict",
       path: "/",
