@@ -12,6 +12,7 @@ import cookieParser from "cookie-parser";
 import {
   AUTH_API_DOMAIN,
   CAR_SITE_FRONTEND_URL,
+  NODE_ENV,
   PORT,
 } from "../../Configs/Enviroment/EnvirmentVariables";
 import { bots } from "../../Bots";
@@ -60,7 +61,13 @@ class HttpServer {
   }
 
   listen() {
-    this.app.listen(PORT, AUTH_API_DOMAIN, () => console.log(`Listening to ${PORT}`));
+    if (NODE_ENV === "development") {
+      this.app.listen(PORT, AUTH_API_DOMAIN, () =>
+        console.log(`Listening to ${PORT}`)
+      );
+    } else {
+      this.app.listen(PORT, () => console.log(`Listening to ${PORT}`));
+    }
   }
 
   middlewares() {
