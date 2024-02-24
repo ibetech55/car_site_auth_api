@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { LoginUseCase } from "../../../Presentation/Auth/LoginUseCase";
 import {
-  AUTH_API_DOMAIN,
+ COOKIE_DOMAIN,
  NODE_ENV,
 } from "../../../Configs/Enviroment/EnvirmentVariables";
 
@@ -23,7 +23,7 @@ class LoginController {
       expires: expirationDate,
       sameSite: "strict",
       path: "/",
-      domain: 'ibetech.shop',
+      domain: COOKIE_DOMAIN,
     });
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
@@ -31,7 +31,7 @@ class LoginController {
       expires: expirationDate,
       sameSite: "strict",
       path: "/",
-      domain: 'ibetech.shop',
+      domain: COOKIE_DOMAIN,
     });
 
     return response.status(200).json(data);
