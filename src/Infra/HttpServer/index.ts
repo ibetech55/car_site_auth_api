@@ -19,10 +19,7 @@ import { bots } from "../../Bots";
 import { rabbitMq } from "../../Queue";
 class HttpServer {
   app: express.Express;
-  private readonly corsOrgins = [
-    CAR_SITE_FRONTEND_URL,
-    "http://localhost:3000",
-  ];
+
   constructor() {
     this.app = express();
     this.defaultHeaders();
@@ -102,11 +99,7 @@ class HttpServer {
 
   defaultHeaders() {
     this.app.use((req, res, next) => {
-      const origin = this.corsOrgins.includes(req.header("origin"))
-        ? req.headers.origin
-        : null;
-
-      res.setHeader("Access-Control-Allow-Credentials", "true");
+        res.setHeader("Access-Control-Allow-Credentials", "true");
 
       res.setHeader(
         "Access-Control-Allow-Headers",

@@ -19,18 +19,16 @@ class LoginController {
 
     response.cookie("auth_token", data.auth_token, {
       httpOnly: true,
-      secure: true,
+      secure: NODE_ENV === 'production',
       expires: expirationDate,
-      maxAge: 1000 * 60 * 60 * 60 * 24 * 7,
       sameSite: "strict",
       path: "/",
       domain: AUTH_API_DOMAIN,
     });
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
-      secure: true,
+      secure: NODE_ENV === 'production',
       expires: expirationDate,
-      maxAge: 1000 * 60 * 60 * 60 * 24 * 7,
       sameSite: "strict",
       path: "/",
       domain: AUTH_API_DOMAIN,
