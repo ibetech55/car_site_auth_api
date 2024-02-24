@@ -10,6 +10,7 @@ import { apiRoutes } from "../../Routes";
 import { AppError } from "../../ErrorHandler/AppError";
 import cookieParser from "cookie-parser";
 import {
+  AUTH_API_DOMAIN,
   CAR_SITE_FRONTEND_URL,
   PORT,
 } from "../../Configs/Enviroment/EnvirmentVariables";
@@ -59,7 +60,7 @@ class HttpServer {
   }
 
   listen() {
-    this.app.listen(PORT, () => console.log(`Listening to ${PORT}`));
+    this.app.listen(PORT, AUTH_API_DOMAIN, () => console.log(`Listening to ${PORT}`));
   }
 
   middlewares() {
@@ -99,12 +100,13 @@ class HttpServer {
         : null;
 
       res.setHeader("Access-Control-Allow-Credentials", "true");
+      res.setHeader("Access-Control-Allow-Origin", origin);
+
       res.setHeader(
         "Access-Control-Allow-Headers",
         "Content-Type, Authorization"
       );
 
-      res.setHeader("Access-Control-Allow-Origin", origin);
       res.setHeader(
         "Access-Control-Allow-Methods",
         "GET, POST, PUT, DELETE, PATCH"

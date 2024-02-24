@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { LogoutUseCase } from "../../../Presentation/Auth/LogoutUseCase";
+import { AUTH_API_DOMAIN, NODE_ENV } from "../../../Configs/Enviroment/EnvirmentVariables";
 
 class LogoutController {
   private _logoutUseCase: LogoutUseCase;
@@ -12,20 +13,20 @@ class LogoutController {
     const data = await this._logoutUseCase.execute(request.cookies['auth_token']);
     response.clearCookie("auth_token", {
       httpOnly: true,
-      secure: true,
+      secure: NODE_ENV === 'production',
       expires: new Date(0),
       sameSite:'strict',
       path: "/",
-      domain: 'ibetech.shop'
+      domain: AUTH_API_DOMAIN
     });
 
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
-      secure: true,
+      secure: NODE_ENV === 'production',
       expires: new Date(0),
       sameSite:'strict',
       path: "/",
-      domain: 'ibetech.shop'
+      domain: AUTH_API_DOMAIN
     });
 
 

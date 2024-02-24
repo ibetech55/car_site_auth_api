@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { LoginUseCase } from "../../../Presentation/Auth/LoginUseCase";
 import {
-  CAR_SITE_FRONTEND_URL,
-  COOKIE_DOMAIN,
+  AUTH_API_DOMAIN,
+ NODE_ENV,
 } from "../../../Configs/Enviroment/EnvirmentVariables";
 
 class LoginController {
@@ -14,27 +14,26 @@ class LoginController {
 
   async handle(request: Request, response: Response) {
     const data = await this._loginUseCase.execute(request.body);
-     const expirationDate = new Date();
+    const expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 7);
-    const expires = expirationDate.toUTCString();
 
     response.cookie("auth_token", data.auth_token, {
       httpOnly: true,
-      secure: true,
+      secure: NODE_ENV === 'production',
       expires: expirationDate,
-      sameSite:'strict',
+      sameSite: "strict",
       path: "/",
-      domain: 'ibetech.shop'
+      domain: AUTH_API_DOMAIN,
     });
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
-      secure: true,
+      secure: NODE_ENV === 'production',
       expires: expirationDate,
-      sameSite:'strict',
+      sameSite: "strict",
       path: "/",
-      domain: 'ibetech.shop'
+      domain: AUTH_API_DOMAIN,
     });
-   
+
     return response.status(200).json(data);
   }
 }
