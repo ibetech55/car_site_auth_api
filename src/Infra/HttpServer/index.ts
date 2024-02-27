@@ -80,7 +80,7 @@ class HttpServer {
   }
 
   routes() {
-    this.app.use("/api", apiRoutes);
+    this.app.use("/auth_api", apiRoutes);
   }
 
   errorHandler() {
