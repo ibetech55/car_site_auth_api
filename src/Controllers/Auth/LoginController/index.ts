@@ -33,7 +33,6 @@ class LoginController {
       path: "/",
       domain: COOKIE_DOMAIN,
     });
-
     return response.status(200).json(data);
   }
 }

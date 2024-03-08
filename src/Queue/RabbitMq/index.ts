@@ -1,5 +1,6 @@
 import amqplib, { Channel, Connection } from "amqplib";
 import { QUEUE_METADATA } from "../QueueMetaData";
+import { RABBITMQ_URL } from "../../Configs/Enviroment/EnvirmentVariables";
 
 export class RabbitMq {
   rabbitMqPub: Connection | null = null;
@@ -8,9 +9,9 @@ export class RabbitMq {
   subChannel: Channel | null = null;
 
   async connect() {
-    this.rabbitMqPub = await amqplib.connect("amqp://localhost:5672");
+    this.rabbitMqPub = await amqplib.connect(RABBITMQ_URL);
     this.pubChannel = await this.rabbitMqPub.createChannel();
-    this.rabbitMqSub = await amqplib.connect("amqp://localhost:5672");
+    this.rabbitMqSub = await amqplib.connect(RABBITMQ_URL);
     this.subChannel = await this.rabbitMqSub.createChannel();
     console.log("RABBIT MQ successfully connected ");
   }

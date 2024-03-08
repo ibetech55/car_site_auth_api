@@ -18,6 +18,8 @@ import {
 import { bots } from "../../Bots";
 import { rabbitMq } from "../../Queue";
 class HttpServer {
+  private corsOrgins = [CAR_SITE_FRONTEND_URL, "http://localhost:3000"];
+
   app: express.Express;
 
   constructor() {
@@ -58,13 +60,7 @@ class HttpServer {
   }
 
   listen() {
-    if (NODE_ENV === "development") {
-      this.app.listen(PORT, AUTH_API_DOMAIN, () =>
-        console.log(`Listening to ${PORT}`)
-      );
-    } else {
-      this.app.listen(PORT, () => console.log(`Listening to ${PORT}`));
-    }
+    this.app.listen(PORT, () => console.log(`Listening to ${PORT}`));
   }
 
   middlewares() {
@@ -72,7 +68,7 @@ class HttpServer {
     this.app.use(cookieParser());
     this.app.use(
       cors({
-        origin: CAR_SITE_FRONTEND_URL,
+        origin: this.corsOrgins,
         credentials: true,
       })
     );
@@ -99,15 +95,18 @@ class HttpServer {
 
   defaultHeaders() {
     this.app.use((req, res, next) => {
-        res.setHeader("Access-Control-Allow-Credentials", "true");
+      const origin = this.corsOrgins.includes(req.header("origin"))
+        ? req.headers.origin
+        : null;
+
+      res.setHeader("Access-Control-Allow-Credentials", "true");
 
       res.setHeader(
         "Access-Control-Allow-Headers",
         "Content-Type, Authorization"
       );
-      
-      res.setHeader("Access-Control-Allow-Origin", CAR_SITE_FRONTEND_URL);
 
+      res.setHeader("Access-Control-Allow-Origin", origin);
 
       res.setHeader(
         "Access-Control-Allow-Methods",

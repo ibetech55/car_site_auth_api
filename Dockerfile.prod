@@ -1,0 +1,23 @@
+FROM node:16
+
+# Create app directory
+WORKDIR /app
+
+# Install app dependencies
+COPY package*.json ./
+COPY entrypoint.sh /usr/local/bin/
+
+RUN npm install
+
+
+# Bundle app source
+COPY . .
+
+
+RUN npm run build
+
+EXPOSE 5003
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["entrypoint.sh"]
+CMD [ "npm", "run" , "start" ]

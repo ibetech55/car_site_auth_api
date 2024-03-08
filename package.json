@@ -36,6 +36,7 @@
     "swagger-ui-express": "^5.0.0",
     "typeorm": "^0.3.16",
     "uuid": "^9.0.0",
+    "wait-for-it": "^1.0.0",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
