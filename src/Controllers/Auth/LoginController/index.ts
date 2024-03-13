@@ -3,6 +3,7 @@ import { LoginUseCase } from "../../../Presentation/Auth/LoginUseCase";
 import {
  COOKIE_DOMAIN,
  NODE_ENV,
+ KUBERENETES_AUTH
 } from "../../../Configs/Enviroment/EnvirmentVariables";
 
 class LoginController {
@@ -16,10 +17,9 @@ class LoginController {
     const data = await this._loginUseCase.execute(request.body);
     const expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 7);
-
     response.cookie("auth_token", data.auth_token, {
       httpOnly: true,
-      secure: NODE_ENV === 'production',
+      secure: NODE_ENV === 'production' && KUBERENETES_AUTH,
       expires: expirationDate,
       sameSite: "strict",
       path: "/",
@@ -27,7 +27,7 @@ class LoginController {
     });
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
-      secure: NODE_ENV === 'production',
+      secure: NODE_ENV === 'production' && KUBERENETES_AUTH,
       expires: expirationDate,
       sameSite: "strict",
       path: "/",

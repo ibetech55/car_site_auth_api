@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { LogoutUseCase } from "../../../Presentation/Auth/LogoutUseCase";
-import { COOKIE_DOMAIN, NODE_ENV } from "../../../Configs/Enviroment/EnvirmentVariables";
+import { COOKIE_DOMAIN, KUBERENETES_AUTH, NODE_ENV } from "../../../Configs/Enviroment/EnvirmentVariables";
 
 class LogoutController {
   private _logoutUseCase: LogoutUseCase;
@@ -13,7 +13,7 @@ class LogoutController {
     const data = await this._logoutUseCase.execute(request.cookies['auth_token']);
     response.clearCookie("auth_token", {
       httpOnly: true,
-      secure: NODE_ENV === 'production',
+      secure: NODE_ENV === 'production' && KUBERENETES_AUTH,
       expires: new Date(0),
       sameSite:'strict',
       path: "/",
@@ -22,7 +22,7 @@ class LogoutController {
 
     response.cookie("login_token", data.login_token, {
       httpOnly: false,
-      secure: NODE_ENV === 'production',
+      secure: NODE_ENV === 'production' && KUBERENETES_AUTH,
       expires: new Date(0),
       sameSite:'strict',
       path: "/",

@@ -11,3 +11,4 @@ export const NODE_ENV = process.env.NODE_ENV;
 export const AUTH_API_DOMAIN = process.env.AUTH_API_DOMAIN;
 export const COOKIE_DOMAIN = process.env.COOKIE_DOMAIN;
 export const RABBITMQ_URL = process.env.RABBITMQ_URL;
+export const KUBERENETES_AUTH = process.env.KUBERENETES_AUTH === 'true' ? true : false 
